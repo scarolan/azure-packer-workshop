@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Azure Packer Workshop</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link REL="stylesheet" TYPE="text/css" HREF="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="link.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: Azure-Packer-Workshop
+class: center,middle,title-slide
+count: false
+![:scale 40%](images/Packer_PrimaryLogo_FullColor.png) ![:scale 40%](./images/microsoft-azure.png)
+.titletext[
+Using HashiCorp Packer on Azure]
+Easily Build Azure Images with Packer
+
+???
+
+---
+name: What-is-Packer
+.center[What is Packer?]
+-------------------------
+
+.center[![:scale 90%](./images/packer_run.png)]
+
+.contents[
+* Open source tool for building machine images
+* Works on all major cloud and VM platforms
+* Build identical OS images on every cloud
+* Create security-hardened golden images
+* Automate your image build pipeline
+]
+
+???
+From the packer.io website:
+Packer is an open source tool for creating identical machine images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. Packer does not replace configuration management like Chef or Puppet. In fact, when building images, Packer is able to use tools like Chef or Puppet to install software onto the image. 
+
+Packer can also leverage shell scripts or Powershell for building machine images.
+
+---
+name: What-are-Images
+What are Azure Images?
+-------------------------
+.center[![:scale 90%](./images/browse_images.png)]
+
+.contents[
+* Master copy of your OS and preinstalled applications
+* Use pre-built images from the Marketplace
+* Or make your own custom images
+* Spin up new instances from your images
+* Gain speed, consistency & security
+]
+
+???
+There's a saying, if you give a set of build instructions to ten sysadmins, you'll end up with ten slightly different machines. They probably won't be wildly different but there will be small changes and config drift. There's just no avoiding this, as soon as you have humans getting on keyboards, no matter how well you've documented your process, you are going to introduce some differences and config drift.
+
+Storage is cheap, and we have the right tools to automate this. There's no reason to reconfigure your OS from scratch every time you spin up a new virtual machine. Instead pre-baked large components, security patches and OS updates into your master images.
+
+---
+name: How-Does-It-Work?
+How Does Packer Work?
+-------------------------
+.center[![:scale 90%](./images/packer_works.jpg)]
+
+Packer reads from a JSON config file, and connects to the Azure API using service account credentials.
+
+???
+
+Packer automates the process of building machine images. It can spin up a new resource group and temporary network for build purposes. It then spins up a virtual machine from a base image of your choice. Most users prefer to use the 'stock' OS image provided by Azure or the OS vendor. Once our temporary VM is up and running, Packer then logs onto the machine and runs provisioning commands. Once the virtual machine has finished provisioning, Packer initiates a snapshot of the image. After the snapshot is complete, Packer shuts down the VM and cleans up after itself. 
+
+---
+name: Exercise-Build-Linux-Box
+Build an Ubuntu Image
+=========================
+.center[![:scale 90%](./images/tutorial.png)]
+
+The rest of this workshop will follow the Packer tutorial on the Microsoft Azure website:
+
+.center[
+## https://bit.ly/2yLjbpB
+]
+
+???
+Long URL:
+https://docs.microsoft.com/en-us/azure/virtual-machines/linux/build-image-with-packer
+
+The rest of this workshop will follow the Packer with Azure tutorial on Microsoft's website. Our next steps will be as follows:
+
+1. Create a resource group to store our newly built images.
+2. Create a service principal for Packer to connect to your Azure account.
+3. Download and install Packer if you haven't already.
+4. Copy and edit the ubuntu.json file to match your account settings.
+5. Run the `packer build` command to create a new Ubuntu image running the nginx web server.
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript"></script>
+    <script src="./remark_settings.js" type="text/javascript"></script>
+  </body>
+</html>
