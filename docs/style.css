@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
 .remark-code, .remark-inline-code { font-family: 'Inconsolata'; }
 
 .remark-container {
-  background-color: #5C4EE5;
+  background-color: rgb(67, 203, 245);
 }
 
 .title-slide .remark-slide-number {
